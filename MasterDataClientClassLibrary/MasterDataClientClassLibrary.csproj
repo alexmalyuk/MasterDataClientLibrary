@@ -56,7 +56,7 @@
     <Compile Include="Core\AbstractConnector.cs" />
     <Compile Include="Core\AbstractConvertor.cs" />
     <Compile Include="Core\AbstractSubject.cs" />
-    <Compile Include="Core\MasterDataClient.cs" />
+    <Compile Include="MasterDataClient.cs" />
     <Compile Include="Exceptions\MasterDataException.cs" />
     <Compile Include="Exceptions\MasterDataConfigurationException.cs" />
     <Compile Include="Exceptions\MasterDataNotEnabledException.cs" />
@@ -64,6 +64,7 @@
     <Compile Include="Exceptions\MasterDataValidationException.cs" />
     <Compile Include="Core\AbstractSubjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeFactoryEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

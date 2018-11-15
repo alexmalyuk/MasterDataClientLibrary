@@ -2,18 +2,12 @@
 {
     public abstract class AbstractSubjectFactory
     {
-        private AbstractConvertor convertor;
-        private object externalEntity;
 
-        public AbstractSubjectFactory(AbstractConvertor convertor, object externalEntity)
+        public AbstractSubjectFactory()
         {
-            this.convertor = convertor;
-            this.externalEntity = externalEntity;
         }
 
-        public AbstractConvertor GetConvertor() => convertor;
-        public object GetExternalEntity() => externalEntity;
-
+        public abstract AbstractConvertor CreateConvertor();
         public abstract AbstractConnector CreateConnector();
         public abstract AbstractSubject CreateSubject();
     }

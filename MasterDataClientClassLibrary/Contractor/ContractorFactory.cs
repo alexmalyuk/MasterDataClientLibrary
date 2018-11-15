@@ -4,13 +4,17 @@ namespace MasterData.Contractor
 {
     public class ContractorFactory : AbstractSubjectFactory
     {
-        public ContractorFactory(AbstractConvertor convertor, object externalEntity) : base(convertor, externalEntity)
+        public ContractorFactory() : base()
         {
         }
 
         public override AbstractConnector CreateConnector()
         {
             return new ContractorConnector();
+        }
+        public override AbstractConvertor CreateConvertor()
+        {
+            return new ContractorConvertor();
         }
 
         public override AbstractSubject CreateSubject()

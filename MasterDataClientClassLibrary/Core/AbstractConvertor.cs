@@ -2,8 +2,11 @@
 {
     abstract public class AbstractConvertor
     {
+        public abstract TypeFactoryEnum TypeFactory { get; }
 
-        abstract public AbstractSubject CreateSubjectFrom(object externalEntity);
-        abstract public void ConvertSubjectTo(AbstractSubject subject, object externalEntity);
+        public abstract void ConvertSubjectToExternal(AbstractSubject subject, object externalEntity);
+
+        public abstract void ConvertExternalToSubject(object externalEntity, AbstractSubject subject);
+
     }
 }
