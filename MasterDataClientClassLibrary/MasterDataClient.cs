@@ -3,35 +3,23 @@ using MasterData.Exceptions;
 
 namespace MasterData.Core
 {
-    public class MasterDataClient<ConvertorType> where ConvertorType : AbstractConvertor
+    public class MasterDataClient<ConvertorType> where ConvertorType : AbstractConvertor, new()
     {
         AbstractConnector connector;
         AbstractConvertor convertor;
         AbstractSubject subject;
         object externalEntity = null;
 
-        public MasterDataClient(ConvertorType convertor)
+        public MasterDataClient()
         {
-            this.convertor = convertor;
+            Factory<ConvertorType> factory = new Factory<ConvertorType>();
 
-            switch (convertor?.TypeFactory)
-            {
-                case TypeFactoryEnum.Contractor:
-                    AbstractSubjectFactory sf = new ContractorFactory();
-                    break;
-            }
-
-            //ConvertorType subjectFactory = new ConvertorType();
-
-            //connector = subjectFactory.CreateConnector();
-            //if (!connector.IsEnabled)
-            //    throw new MasterDataNotEnabledException("MasterData is not enabled.");
-
-            //convertor = subjectFactory.CreateConvertor();
-            //subject = subjectFactory.CreateSubject();
+            connector = factory.CreateConnector();
+            convertor = factory.CreateConvertor();
+            subject = factory.CreateSubject();
         }
 
-        public MasterDataClient(ConvertorType convertor, object externalEntity) : this(convertor)
+        public MasterDataClient(object externalEntity) : this()
         {
             ExternalEntity = externalEntity;
         }
@@ -49,12 +37,12 @@ namespace MasterData.Core
 
         public void ConvertExternalEntityToSubject()
         {
-            subject = convertor.CreateSubjectFrom(externalEntity);
+            convertor.ConvertExternalToSubject(externalEntity, subject);
         }
 
         public void ConvertSubjectToExternalEntity()
         {
-            convertor.ConvertSubjectTo(subject, externalEntity);
+            convertor.ConvertSubjectToExternal(subject, externalEntity);
         }
 
         public void Post()
@@ -65,7 +53,7 @@ namespace MasterData.Core
         public void Get()
         {
             subject = connector.Get(subject.Id);
-            convertor.ConvertSubjectTo(subject, externalEntity);
+            convertor.ConvertSubjectToExternal(subject, externalEntity);
         }
 
     }
