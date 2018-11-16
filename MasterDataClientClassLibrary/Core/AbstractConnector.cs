@@ -14,33 +14,33 @@ namespace MasterData.Core
     {
         internal string nodeAlias;
         internal string host;
-        internal bool isEnabled;
-        public bool IsEnabled => isEnabled;
 
         public AbstractConnector()
         {
             var Section = ConfigurationManager.GetSection("masterData");
-            if(Section == null)
+            if (Section == null)
                 throw new MasterDataConfigurationException("Section 'masterData' in App.config file is missing.");
-
             NameValueCollection masterDataSettings = Section as NameValueCollection;
-            string sIsEnabled = masterDataSettings["IsEnabled"];
+
             try
             {
-                isEnabled = Convert.ToBoolean(sIsEnabled);
+                string sIsEnabled = masterDataSettings["IsEnabled"];
+                if (!Convert.ToBoolean(sIsEnabled))
+                    throw new MasterDataNotEnabledException("MasterData is not enabled.");
             }
+            catch (MasterDataNotEnabledException) { }
             catch (Exception ex)
             {
-                throw new MasterDataConfigurationException("Invalid value for 'IsEnabled' key. It must be 'true' or 'false'. Check, please, the App.config" , ex);
+                throw new MasterDataConfigurationException("Invalid value for 'IsEnabled' key. It must be 'true' or 'false'. Check, please, the App.config file" , ex);
             }
 
             host = masterDataSettings["Host"];
             if (string.IsNullOrEmpty(host))
-                throw new MasterDataConfigurationException("The key 'host' not found. Check, please, the App.config");
+                throw new MasterDataConfigurationException("The key 'host' not found. Check, please, the App.config file");
 
             nodeAlias = masterDataSettings["NodeAlias"];
             if (nodeAlias == null)
-                throw new MasterDataConfigurationException("The key 'nodeAlias' not found. Check, please, the App.config");
+                throw new MasterDataConfigurationException("The key 'nodeAlias' not found. Check, please, the App.config file");
         }
 
         internal void HttpPostDataAs<T>(string serverPath, T data)

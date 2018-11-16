@@ -1,6 +1,6 @@
 ﻿namespace MasterData.Core
 {
-    abstract public class AbstractConvertor
+    public abstract class AbstractConvertor
     {
         public abstract TypeFactoryEnum TypeFactory { get; }
 
