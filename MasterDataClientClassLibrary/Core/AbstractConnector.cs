@@ -14,6 +14,7 @@ namespace MasterData.Core
     {
         internal string nodeAlias;
         internal string host;
+        internal NetworkCredential credentials;
 
         public AbstractConnector()
         {
@@ -41,6 +42,11 @@ namespace MasterData.Core
             nodeAlias = masterDataSettings["NodeAlias"];
             if (nodeAlias == null)
                 throw new MasterDataConfigurationException("The key 'nodeAlias' not found. Check, please, the App.config file");
+
+            string username = masterDataSettings["Username"];
+            string password = masterDataSettings["Password"];
+
+            credentials = new NetworkCredential(username, password);
         }
 
         internal void HttpPostDataAs<T>(string serverPath, T data)
@@ -50,6 +56,7 @@ namespace MasterData.Core
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uriBuilder.Uri);
             request.Method = "POST";
             request.ContentType = "application/json; charset=utf-8";
+            request.Credentials = credentials;
 
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(T));
             Stream dataStream = request.GetRequestStream();
@@ -88,6 +95,7 @@ namespace MasterData.Core
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uriBuilder.Uri);
             request.Method = "GET";
             request.ContentType = "application/json; charset=utf-8";
+            request.Credentials = credentials;
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream dataStream = response.GetResponseStream();
