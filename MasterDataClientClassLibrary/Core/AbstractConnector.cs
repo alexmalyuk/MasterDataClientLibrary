@@ -1,4 +1,5 @@
 ﻿using MasterData.Exceptions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -14,6 +15,8 @@ namespace MasterData.Core
     {
         internal string nodeAlias;
         internal string host;
+        internal string userName;
+        internal string password;
 
         public AbstractConnector()
         {
@@ -81,8 +84,22 @@ namespace MasterData.Core
 
             httpRes.Close();
         }
-        internal T HttpGetDataAs<T>(string serverPath)
+        internal TypeOfData HttpGetDataAs<TypeOfData>(string serverPath)
         {
+
+            //var client = new HttpClient();
+            ////client.DefaultRequestHeaders.Authorization =
+            ////    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+            //UriBuilder uriBuilder = new UriBuilder(host);
+            //uriBuilder.Path += serverPath;
+
+            //var response = client.GetAsync(uriBuilder.Uri).Result;
+            //var result = response.Content.ReadAsStringAsync().Result;
+            //TypeOfData readObject = JsonConvert.DeserializeObject<TypeOfData>(result);
+
+            //return readObject;
+
             UriBuilder uriBuilder = new UriBuilder(host);
             uriBuilder.Path += serverPath;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uriBuilder.Uri);
@@ -91,8 +108,8 @@ namespace MasterData.Core
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream dataStream = response.GetResponseStream();
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(T));
-            T readObject = (T)jsonFormatter.ReadObject(dataStream);
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TypeOfData));
+            TypeOfData readObject = (TypeOfData)jsonFormatter.ReadObject(dataStream);
 
             response.Close();
             return readObject;
