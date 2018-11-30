@@ -63,7 +63,7 @@
     <Compile Include="Exceptions\MasterDataValidationException.cs" />
     <Compile Include="Core\Factory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\TypeFactoryEnum.cs" />
+    <Compile Include="Core\Enums.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

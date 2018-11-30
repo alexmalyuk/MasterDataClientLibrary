@@ -5,6 +5,11 @@ using System.Text;
 
 namespace MasterData
 {
+    public static class Const
+    {
+        public const string DataContractNameSpace = "http://www.metrans.com.ua";
+    }
+
     public enum TypeFactoryEnum
     {
         Contractor,

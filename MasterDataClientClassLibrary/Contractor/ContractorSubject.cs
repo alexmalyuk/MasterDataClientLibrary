@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace MasterData.Contractor
 {
-    [DataContract(Name = "ContractorInfo", Namespace = "http://www.metrans.com.ua")]
+    [DataContract(Name = "ContractorInfo", Namespace = Const.DataContractNameSpace)]
     public class ContractorSubject : AbstractSubject
     {
         [DataMember]
@@ -15,10 +15,26 @@ namespace MasterData.Contractor
         [DataMember]
         public string VATNumber { get; set; }
         [DataMember]
-        public string LegalAddress { get; set; }
-        [DataMember]
-        public int? CountryCode { get; set; }
+        public int? CountryOfRegistration { get; set; }
         [DataMember]
         public int? TypeOfCounterparty { get; set; }
+        [DataMember]
+        public string PostalCode { get; set; }
+        [DataMember]
+        public string Country { get; set; }
+        [DataMember]
+        public string Region { get; set; }
+        [DataMember]
+        public string District { get; set; }
+        [DataMember]
+        public string City { get; set; }
+        [DataMember]
+        public string Street { get; set; }
+        [DataMember]
+        public string House { get; set; }
+        [DataMember]
+        public string Flat { get; set; }
+        [DataMember]
+        public string StringRepresentedAddress { get; set; }
     }
 }
