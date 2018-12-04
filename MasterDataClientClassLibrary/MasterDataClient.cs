@@ -56,5 +56,16 @@ namespace MasterData.Core
             convertor.ConvertSubjectToExternal(subject, externalEntity);
         }
 
+        public AbstractSubject Subject
+        {
+            get
+            {
+                return subject;
+            }
+            set
+            {
+                subject = value;
+            }
+        }
     }
 }
