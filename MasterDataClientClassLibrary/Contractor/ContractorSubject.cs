@@ -36,6 +36,12 @@ namespace MasterData.Contractor
         public string Flat { get; set; }
         [DataMember]
         public string StringRepresentedAddress { get; set; }
+        [DataMember]
+        public bool IsBranch { get; set; }
+        [DataMember]
+        public string HeadContractorNativeId { get; set; }
+        [DataMember]
+        public string BranchCode { get; set; }
 
         public override string ToString()
         {
