@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contractor\ContractorConnector.cs" />
+    <Compile Include="Contractor\ContractorOpenDataModel.cs" />
     <Compile Include="Contractor\ContractorSubject.cs" />
     <Compile Include="Core\AbstractConnector.cs" />
     <Compile Include="Core\AbstractConvertor.cs" />

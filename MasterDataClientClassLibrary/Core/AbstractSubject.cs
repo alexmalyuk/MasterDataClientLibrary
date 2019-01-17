@@ -6,11 +6,10 @@ namespace MasterData.Core
     abstract public class AbstractSubject
     {
         [DataMember(Name = "NativeId")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [DataMember]
         public string Name { get; set; }
         [DataMember]
         public string User { get; set; }
-
     }
 }

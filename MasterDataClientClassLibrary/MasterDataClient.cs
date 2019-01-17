@@ -52,8 +52,11 @@ namespace MasterData.Core
 
         public void Get()
         {
-            subject = connector.Get(subject.Id);
-            convertor.ConvertSubjectToExternal(subject, externalEntity);
+            if (subject.Id != null)
+            {
+                subject = connector.Get((int)subject.Id);
+                convertor.ConvertSubjectToExternal(subject, externalEntity);
+            }
         }
 
         public AbstractSubject Subject
