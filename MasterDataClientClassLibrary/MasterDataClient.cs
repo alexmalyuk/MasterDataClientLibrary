@@ -5,10 +5,10 @@ namespace MasterData.Core
 {
     public class MasterDataClient<ConvertorType> where ConvertorType : AbstractConvertor, new()
     {
-        AbstractConnector connector;
-        AbstractConvertor convertor;
-        AbstractSubject subject;
-        object externalEntity = null;
+        private AbstractConnector connector;
+        private AbstractConvertor convertor;
+        private AbstractSubject subject;
+        private object externalEntity = null;
 
         public MasterDataClient()
         {
@@ -69,6 +69,11 @@ namespace MasterData.Core
             {
                 subject = value;
             }
+        }
+
+        public ContractorOpenDataModel GetContractorOpenData(string okpo)
+        {
+            return ((ContractorConnector)connector)?.GetOpenData(okpo);
         }
     }
 }

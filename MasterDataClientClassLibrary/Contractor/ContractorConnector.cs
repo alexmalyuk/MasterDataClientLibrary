@@ -29,5 +29,10 @@ namespace MasterData.Contractor
 
             HttpPostDataAs<ContractorSubject>("ContractorInfo/" + nodeAlias, contractorSubject);
         }
+
+        public ContractorOpenDataModel GetOpenData(string okpo)
+        {
+            return HttpGetDataAs<ContractorOpenDataModel>("OpenData/" + okpo);
+        }
     }
 }
